@@ -176,13 +176,23 @@ out$Y<-out$V1*B1+out$V2*B2+out$error
 
 **Answer:**
 
+```{r}
+summary(lm(Y~V1+V2, data=out))
+```
+
+Estimates of $\beta_1$ and $\beta_2$ are biased because $V_1$ and $V_2$ are highly correlated with one another, creating multicollinearity.
 
 **Question 2: Write a chunk in which you regress $Y$ on $V_1$ only. Is your estimate of $\beta_1$ biased?**
 
 **Answer:**
 
+```{r}
+summary(lm(Y~V1, data=out))
+```
 
-**Question 3: Generate a new variable $Y_{adj}$ such that $Y_{adj}=Y-\beta_2*V_2$. Then regress $Y_{adj}$ on $V_1$. Is your estimate of $\beta_1$ biased? Can you explain why/why not?**
+$\beta_1$ is biased because it capture the effect of both $V_1$ and $V_2$ on $Y$, creating omitted variable bias.
+
+**Question 3: Generate a new variable $Y_{adj}$ called adjY such that $Y_{adj}=Y-\beta_2*V_2$. Then regress $Y_{adj}$ on $V_1$. Is your estimate of $\beta_1$ biased? Can you explain why/why not?**
 
 **Answer:**
 
@@ -190,14 +200,13 @@ out$Y<-out$V1*B1+out$V2*B2+out$error
 **Question 4: The code below generates a scatter plot and regression line for the relationship between $V_1$ and $Y$ as well as $V_1$ and $Y_{adj}$. Submit an improved visualization of this data. Hint: you will need to delete the # to get the code to run **
 
 ```{r key 4}
-#plotted<-ggplot(out, aes(V1, y = value, color = variable)) + 
-#    geom_point(aes(y = Y, col = "Y")) + 
-#    geom_point(aes(y = adjY, col = "adjY"))+
-#    geom_smooth(method='lm', aes(y = Y, col = "Y"))+
-#    geom_smooth(method='lm', aes(y = adjY, col = "Y"))
+# plotted <- ggplot(out, aes(V1, y = value, color = variable)) + 
+   # geom_point(aes(y = Y, col = "Y")) + 
+   # geom_point(aes(y = adjY, col = "adjY"))+
+   # geom_smooth(method='lm', aes(y = Y, col = "Y"))+
+   # geom_smooth(method='lm', aes(y = adjY, col = "Y"))
 
-#plotted
-
+# plotted
 ```
 
 
