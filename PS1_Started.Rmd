@@ -190,12 +190,16 @@ Estimates of $\beta_1$ and $\beta_2$ are biased because $V_1$ and $V_2$ are high
 summary(lm(Y~V1, data=out))
 ```
 
-$\beta_1$ is biased because it capture the effect of both $V_1$ and $V_2$ on $Y$, creating omitted variable bias.
+$\beta_1$ is biased because it captures the effect of both $V_1$ and $V_2$ on $Y$, creating omitted variable bias.
 
 **Question 3: Generate a new variable $Y_{adj}$ called adjY such that $Y_{adj}=Y-\beta_2*V_2$. Then regress $Y_{adj}$ on $V_1$. Is your estimate of $\beta_1$ biased? Can you explain why/why not?**
 
 **Answer:**
-
+```{r}
+out$adjY<-out$Y-B2*out$V2
+summary(lm(adjY~V1,data=out))
+```
+$\beta_1$ is still biased because again it captures the effect of both $V_1$ and $V_2$ on $Y$, creating omitted variable bias.
 
 **Question 4: The code below generates a scatter plot and regression line for the relationship between $V_1$ and $Y$ as well as $V_1$ and $Y_{adj}$. Submit an improved visualization of this data. Hint: you will need to delete the # to get the code to run **
 
